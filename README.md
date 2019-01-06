@@ -1,2 +1,2 @@
 # testgolang
-test
+test 2

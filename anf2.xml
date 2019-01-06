@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Abteilungen>
+    <Abteilung>  
+        <Name>EDV</Name>        
+            <Key type="text">Windows User</Key>
+            <Key type="radio">Medico User</Key>                           
+            <Key type="radio">Domänen-Admin</Key>                           
+    </Abteilung>  
+    <Abteilung>  
+        <Name>Haustechnik</Name>        
+            <Key type="text">Brecheisen</Key>
+            <Key type="radio">Zahnstocher</Key>                           
+    </Abteilung>  
+</Abteilungen>
+
+
+
+<users>
+  <user type="admin">
+    <name>Elliot</name>
+    <social>
+      <facebook>https://facebook.com</facebook>
+      <twitter>https://twitter.com</twitter>
+      <youtube>https://youtube.com</youtube>
+    </social>
+  </user>  
+  <user type="reader">
+    <name>Fraser</name>
+    <social>
+      <facebook>https://facebook.com</facebook>
+      <twitter>https://twitter.com</twitter>
+      <youtube>https://youtube.com</youtube>
+    </social>
+  </user>  
+</users>

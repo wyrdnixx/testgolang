@@ -1,0 +1,19 @@
+{{template "header"}}
+
+<h1>{{.Title}}</h1>
+
+
+<a href="/" class="btn btn-success">back</a>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">File: {{.Title}}</div>
+    <div class="panel-body">{{printf "%s" .Body}}</div>
+  </div>
+
+
+<div>
+    <p><a href="/edit/{{.Title}}" class="btn btn-danger">edit</a></p>    
+</div>
+
+

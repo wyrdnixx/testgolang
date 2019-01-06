@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Abteilungen>
+    <Abteilung>  
+        <Name>EDV</Name>
+            <Dataset>
+                <Key type="text">Windows User</Key>
+                <Key type="bla"> medico User</Key>        
+            </Dataset>
+    </Abteilung>  
+    <Abteilung>  
+        <Name>Haustechnik</Name>
+            <Dataset>
+                <Key type="text">
+                    <Name>Hausschlüssel</Name>
+                </Key>
+                <Key type="blub">Brecheisen</Key>        
+            </Dataset>
+    </Abteilung>      
+</Abteilungen>
+
+
+<users>
+  <user type="admin">
+    <name>Elliot</name>
+    <social>
+      <facebook>https://facebook.com</facebook>
+      <twitter>https://twitter.com</twitter>
+      <youtube>https://youtube.com</youtube>
+    </social>
+  </user>  
+  <user type="reader">
+    <name>Fraser</name>
+    <social>
+      <facebook>https://facebook.com</facebook>
+      <twitter>https://twitter.com</twitter>
+      <youtube>https://youtube.com</youtube>
+    </social>
+  </user>  
+</users>

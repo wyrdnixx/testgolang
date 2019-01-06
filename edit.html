@@ -1,0 +1,28 @@
+
+ {{template "header"}}
+
+<h1>Editing {{.Title}}</h1>
+
+
+<a href="/" class="btn btn-success">back</a>
+
+
+<div>
+
+    <form action="/save/{{.Title}}" method="POST">
+
+        <div class="form-group">
+            <label for="editbox">File:</label>
+            <textarea class="form-control" rows="20" id="editbox" name="editbox">{{printf "%s" .Body}}</textarea>
+          </div> 
+
+        
+        <div><input type="submit" value="Save" class="btn btn-info"></div>
+        <br>
+        <div>
+            <U>Orginal:</U><br>
+            {{.Title}}<br><br>
+            {{printf "%s" .Body}}
+        </div>
+    </form>
+</div>

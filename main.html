@@ -1,0 +1,58 @@
+
+
+ {{template "header"}}
+
+
+<div class="container">
+    <h1>Files viewer</h1>
+    <p>View or edit files</p>
+
+    <!-- <div class="row">-->
+        <p>{{.}}</p>
+        
+              
+        <form action="/send" method="POST">
+        
+        <table class="table">
+          {{range .Abteilungen}}  
+
+          {{ $Abteilung := . }}
+
+          <thead class="thead-dark">
+              <tr>                
+                <th scope="col">Abteilung : {{.Name}}</th>
+                <th scope="col">Eintrag</th>
+                <th scope="col">Wert</th>
+              </tr>
+            </thead>           
+                
+            {{range .Keys}}
+                <tr>                  
+                  <td></td>                  
+                  <td>Key : {{.KeyName}}</td>                        
+                  {{if eq .KeyType "text"}}                  
+                  <td><input type="text" class="form-control" name="{{$Abteilung.Name}}{{.KeyName}}" id="{{$Abteilung.Name}}{{.KeyName}}"></input></td>                      
+                  {{end}}
+                  {{if eq .KeyType "radio"}}                                        
+                      <td>                        
+                            <select class="form-control" name="{{$Abteilung.Name}}{{.KeyName}}" id="{{$Abteilung.Name}}{{.KeyName}}">
+                                <option>Nein</option>
+                                <option>Ja</option>
+                        </select>
+                    </td>  
+                  {{end}}
+              </tr>
+              {{end}}
+             {{end}}
+            </tbody>
+          </table>
+  <div><input type="submit" value="Speichern" class="btn btn-info"></div>
+  
+</form>
+    <!-- <td><a href="/edit/{{.}}"> edit: {{.}}</td>-->
+
+</div>
+
+
+
+

@@ -1,2 +1,1 @@
 # testgolang
-test 2

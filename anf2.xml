@@ -11,6 +11,13 @@
             <Key type="text">Brecheisen</Key>
             <Key type="radio">Zahnstocher</Key>                           
     </Abteilung>  
+    <Abteilung>  
+        <Name>Personalabteilung</Name>        
+            <Key type="text">Anrede Eure Herlichkeit</Key>
+            <Key type="radio">Gratis Essen</Key>
+            <Key type="radio">Selbstbestimmtes Gehalt</Key>                           
+            <Key type="radio">Beliebige Arbeitszeiten</Key>                           
+    </Abteilung>  
 </Abteilungen>
 
 

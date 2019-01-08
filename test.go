@@ -31,6 +31,8 @@ type Key struct {
 	KeyType string   `xml:"type,attr"`
 }
 
+// testfunktion um xml einzulesen
+
 func processXmlFile(_file string) (*Abteilungen, error) {
 	// Read XML File
 	xmlFile, err := os.Open(_file)
@@ -72,6 +74,7 @@ func processXmlFile(_file string) (*Abteilungen, error) {
 
 func main() {
 	fmt.Printf("Hello World\n")
+
 	// Variablen
 	srvport := ":8080"
 

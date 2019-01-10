@@ -8,7 +8,17 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/tkanos/gonfig"
 )
+
+type Configuration struct {
+	SrvPort  string
+	PGDBName string
+	PGDBHost string
+	PGDBUser string
+	PGDBPass string
+}
 
 type Page struct {
 	Title string
@@ -75,8 +85,14 @@ func processXmlFile(_file string) (*Abteilungen, error) {
 func main() {
 	fmt.Printf("Hello World\n")
 
-	// Variablen
-	srvport := ":8080"
+	// Config aus file laden:
+	configuration := Configuration{}
+	err := gonfig.GetConf("./config.development.json", &configuration)
+	if err != nil {
+		fmt.Println("ERROR: Config konnte nicht geladen werden.")
+	}
+
+	fmt.Println("INFO: Server lsitening on Port: ", configuration.SrvPort)
 
 	// XML File enlesen
 	//processXmlFile("anf2.xml")
@@ -90,7 +106,7 @@ func main() {
 	http.HandleFunc("/send", sendHandler)
 
 	log.Println("INFO: starting webservice ...")
-	log.Fatal(http.ListenAndServe(srvport, nil))
+	log.Fatal(http.ListenAndServe(configuration.SrvPort, nil))
 
 }
 

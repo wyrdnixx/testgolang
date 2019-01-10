@@ -1,0 +1,8 @@
+{
+
+	"SrvPort"  : "0.0.0.0:8080",
+	"PGDBName" : "database",
+	"PGDBHost" : "127.0.0.1",
+    "PGDBUser" : "postgres",
+    "PGDBPass"  :   "abc123"
+}

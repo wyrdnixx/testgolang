@@ -9,7 +9,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/tkanos/gonfig"
+	_ "github.com/lib/pq"      // Postgres
+	"github.com/tkanos/gonfig" //gonfig -> config aus json file lesen
+	// SQL Library
 )
 
 type Configuration struct {
@@ -107,6 +109,16 @@ func main() {
 
 	log.Println("INFO: starting webservice ...")
 	log.Fatal(http.ListenAndServe(configuration.SrvPort, nil))
+
+	// Test DB-Verbindung
+	checkDB()
+}
+
+// Test - auf die DB Verbinden
+//https://astaxie.gitbooks.io/build-web-application-with-golang/en/05.4.html
+func checkDB() {
+	dbinfo := fmt.Sprintf("user=% pass=%s dbname=%s",
+		configuration.PGDBUser, configuration.PGDBPass, configuration.PGDBName)
 
 }
 

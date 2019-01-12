@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"html/template"
@@ -8,6 +9,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	// installieren
+	//ulewu@ubu:~/goLang/testgolang$ go get github.com/lib/pq
+	//ulewu@ubu:~/goLang/testgolang$ go get github.com/tkanos/gonfig
 
 	_ "github.com/lib/pq"      // Postgres
 	"github.com/tkanos/gonfig" //gonfig -> config aus json file lesen
@@ -111,20 +116,25 @@ func main() {
 	log.Fatal(http.ListenAndServe(configuration.SrvPort, nil))
 
 	// Test DB-Verbindung
-	checkDB()
+	checkDB(configuration)
 }
 
 // Test - auf die DB Verbinden
 //https://astaxie.gitbooks.io/build-web-application-with-golang/en/05.4.html
-func checkDB() {
-	dbinfo := fmt.Sprintf("user=% pass=%s dbname=%s",
-		configuration.PGDBUser, configuration.PGDBPass, configuration.PGDBName)
+func checkDB(conf Configuration) {
+	//dbinfo := fmt.Sprintf("user=% pass=%s dbname=%s",
+	//		conf.PGDBUser, conf.PGDBPass, conf.PGDBName)
 
 }
 
 type myData struct {
 	Owner string
 	Name  string
+}
+
+type JSONDATA struct {
+	key   string
+	value string
 }
 
 func sendHandler(w http.ResponseWriter, r *http.Request) {
@@ -140,6 +150,23 @@ func sendHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(key, value)
 		}
 	}
+
+	// encode body to json
+	var jsd JSONDATA
+	if r.Body == nil {
+		http.Error(w, "Please send a request body", 400)
+		return
+	}
+	err := json.NewDecoder(r.Body).Decode(&jsd)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	fmt.Println(jsd)
+	//fmt.Println(jsd.value)
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
+	///////////////
 
 	http.Redirect(w, r, "/", http.StatusFound)
 }

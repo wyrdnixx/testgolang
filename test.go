@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -14,7 +15,8 @@ import (
 	//ulewu@ubu:~/goLang/testgolang$ go get github.com/lib/pq
 	//ulewu@ubu:~/goLang/testgolang$ go get github.com/tkanos/gonfig
 
-	_ "github.com/lib/pq"      // Postgres
+	_ "github.com/lib/pq" // Postgres
+
 	"github.com/tkanos/gonfig" //gonfig -> config aus json file lesen
 	// SQL Library
 )
@@ -112,18 +114,44 @@ func main() {
 
 	http.HandleFunc("/send", sendHandler)
 
+	// Test DB-Verbindung
+	checkDB(configuration)
+
 	log.Println("INFO: starting webservice ...")
 	log.Fatal(http.ListenAndServe(configuration.SrvPort, nil))
 
-	// Test DB-Verbindung
-	checkDB(configuration)
 }
 
 // Test - auf die DB Verbinden
 //https://astaxie.gitbooks.io/build-web-application-with-golang/en/05.4.html
+
+// Create user in Postgres
+// user create Script
+//create user myuser with encrypted password 'mypass';
+//grant all privileges on database database to myuser;
+
 func checkDB(conf Configuration) {
-	//dbinfo := fmt.Sprintf("user=% pass=%s dbname=%s",
-	//		conf.PGDBUser, conf.PGDBPass, conf.PGDBName)
+	dbinfo := fmt.Sprintf("user=%s pass=%s dbname=%s sslmode=disable",
+		conf.PGDBUser, conf.PGDBPass, conf.PGDBName)
+	fmt.Printf("user=%s pass=%s dbname=%s sslmode=disable",
+		conf.PGDBUser, conf.PGDBPass, conf.PGDBName)
+
+	fmt.Println("INFO: Try DB Connect...")
+	db, err := sql.Open("postgres", dbinfo)
+	if err != nil {
+		fmt.Println("ERROR: DB Connection: ", err.Error())
+	}
+	defer db.Close()
+
+	rows, err := db.Query("select * from testtable;")
+	if err != nil {
+		fmt.Println("ERROR: DB Connection: ", err.Error())
+	}
+	for rows.Next() {
+		var id int
+		rows.Scan(&id)
+		fmt.Println("%3v ")
+	}
 
 }
 

@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"html/template"
@@ -115,7 +114,7 @@ func main() {
 	http.HandleFunc("/send", sendHandler)
 
 	// Test DB-Verbindung
-	checkDB(configuration)
+	//	checkDB(configuration)
 
 	log.Println("INFO: starting webservice ...")
 	log.Fatal(http.ListenAndServe(configuration.SrvPort, nil))
@@ -170,31 +169,35 @@ func sendHandler(w http.ResponseWriter, r *http.Request) {
 	//	body := r.FormValue("editbox")
 	fmt.Printf("Executing SendHandler\n")
 
-	// key, value unten geht irgendwie nur, wenn vorher dieses FormValue gemacht wird.
-	fmt.Println(r.FormValue("*"))
+	////////////////////////////
+	/// Dies war der erste test
+	/*
+		// key, value unten geht irgendwie nur, wenn vorher dieses FormValue gemacht wird.
+		fmt.Println(r.FormValue("*"))
 
-	for key, values := range r.Form { // range over map
-		for _, value := range values { // range over []string
-			fmt.Println(key, value)
+		for key, values := range r.Form { // range over map
+			for _, value := range values { // range over []string
+				fmt.Println(key, value)
+			}
 		}
-	}
 
-	// encode body to json
-	var jsd JSONDATA
-	if r.Body == nil {
-		http.Error(w, "Please send a request body", 400)
-		return
-	}
-	err := json.NewDecoder(r.Body).Decode(&jsd)
-	if err != nil {
-		http.Error(w, err.Error(), 400)
-		return
-	}
-	fmt.Println(jsd)
-	//fmt.Println(jsd.value)
+		// encode body to json  t
+		var jsd JSONDATA
+		if r.Body == nil {
+			http.Error(w, "Please send a request body", 400)
+			return
+		}
+		err := json.NewDecoder(r.Body).Decode(&jsd)
+		if err != nil {
+			http.Error(w, err.Error(), 400)
+			return
+		}
+		fmt.Println(jsd)
+		//fmt.Println(jsd.value)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
-	///////////////
+		log.Fatal(http.ListenAndServe(":8080", nil))
+		///////////////
+	*/
 
 	http.Redirect(w, r, "/", http.StatusFound)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"html/template"
@@ -114,7 +115,7 @@ func main() {
 	http.HandleFunc("/send", sendHandler)
 
 	// Test DB-Verbindung
-	//	checkDB(configuration)
+	checkDB(configuration)
 
 	log.Println("INFO: starting webservice ...")
 	log.Fatal(http.ListenAndServe(configuration.SrvPort, nil))
